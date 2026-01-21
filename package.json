@@ -1,0 +1,23 @@
+{
+  "name": "fintech-expense-tool",
+  "version": "1.0.0",
+  "description": "Fintech Expense Classification & Reporting Tool",
+  "private": true,
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "start:dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "start:prod": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\"",
+    "build": "cd frontend && npm run build",
+    "test": "cd backend && npm test",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

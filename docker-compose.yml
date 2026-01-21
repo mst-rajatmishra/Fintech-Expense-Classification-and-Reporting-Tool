@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fintech_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: fintech_db
+      DB_PORT: 5432
+      JWT_SECRET: fintech_super_secret_key_2024_change_in_production
+      JWT_EXPIRE: 7d
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: npm run dev
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm start
+
+volumes:
+  postgres_data:
