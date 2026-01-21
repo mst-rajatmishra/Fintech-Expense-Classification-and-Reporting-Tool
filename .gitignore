@@ -1,33 +1,102 @@
-node_modules/
+# =========================
+# Environment variables
+# =========================
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
+# =========================
+# Dependencies
+# =========================
+node_modules/
+jspm_packages/
+bower_components/
+web_modules/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# =========================
+# OS / Editor files
+# =========================
 .DS_Store
+Thumbs.db
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
 
+# =========================
+# Build outputs
+# =========================
 dist/
 build/
-.next/
 out/
+.next/
+.nuxt/
+.vuepress/dist
+.svelte-kit/
+**/.vitepress/dist
 
+# =========================
+# Coverage / cache
+# =========================
 coverage/
 .nyc_output/
+*.lcov
+.cache/
+.parcel-cache
+.grunt
+.npm
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
 
+# =========================
+# Uploads & reports
+# =========================
 uploads/
 reports/
 *.csv
 *.pdf
 
-.cache/
+# =========================
+# Runtime & diagnostic
+# =========================
+pids
+*.pid
+*.seed
+*.pid.lock
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# =========================
+# Yarn v3
+# =========================
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# =========================
+# Firebase / Serverless
+# =========================
+.firebase/
+.serverless/
+.dynamodb/
+
+# =========================
+# Vite
+# =========================
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
