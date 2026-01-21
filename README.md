@@ -324,8 +324,3 @@ For issues, questions, or feedback:
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: January 2026  
-**Status**: Production Ready
-
-Built for better financial management
