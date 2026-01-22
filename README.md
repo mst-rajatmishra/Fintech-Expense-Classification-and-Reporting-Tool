@@ -45,51 +45,90 @@ fintech-expense-tool/
 └── README.md              # This file
 ```
 
-## Quick Start
+## How to Run This Project - Step by Step
 
 ### Prerequisites
-- Node.js 14+ and npm
-- PostgreSQL 12+ (or use Docker)
-- Git
+- Node.js installed (check: `node --version`)
+- Docker Desktop installed and running
 
-### Option 1: Docker (Recommended)
+---
 
-```bash
-# Install Docker and Docker Compose, then:
-docker-compose up
+### STEP 1: Start PostgreSQL Database
 
-# Frontend: http://localhost:3000
-# Backend: http://localhost:5000
-# Database: localhost:5432
+Open PowerShell and run:
+```powershell
+docker run -d --name fintech-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=fintech_db -p 5433:5432 postgres:15-alpine
 ```
 
-### Option 2: Local Development
+Wait 5 seconds for the database to start.
 
-#### Backend Setup
-```bash
-cd backend
-npm install
-cp .env.example .env
+---
 
-# Edit .env with your database credentials
-# DB_HOST=localhost, DB_USER=postgres, etc.
+### STEP 2: Start Backend Server
 
-npm run dev    # Runs on http://localhost:5000
+Open a NEW PowerShell window:
+```powershell
+cd C:\Users\RAJAT\Desktop\assignmentsss\backend
+node server.js
 ```
 
-#### Frontend Setup
-```bash
-cd frontend
-npm install
-npm start      # Runs on http://localhost:3000
+You should see: "Server running on port 5000"
+KEEP THIS WINDOW OPEN.
+
+---
+
+### STEP 3: Start Frontend Application
+
+Open ANOTHER NEW PowerShell window:
+```powershell
+cd C:\Users\RAJAT\Desktop\assignmentsss\frontend
+npm start
 ```
 
-#### PostgreSQL Setup
-```bash
-# Create database
-createdb fintech_expense
+Browser will automatically open at http://localhost:3000
+KEEP THIS WINDOW OPEN.
 
-# Tables are auto-created by Sequelize on first run
+---
+
+### STEP 4: Use the Application
+
+1. Click "Sign Up" and create an account
+2. Login with your credentials
+3. Click "Upload Transactions"
+4. Upload a CSV file (see format below)
+5. View your dashboard with categorized expenses
+
+---
+
+## How to Stop Everything
+
+### Stop Backend and Frontend
+- Go to each PowerShell window
+- Press `Ctrl + C`
+
+### Stop Database
+```powershell
+docker stop fintech-db
+docker rm fintech-db
+```
+
+---
+
+## Next Time (If Already Run Once)
+
+If the database container already exists:
+
+```powershell
+# Start database (if not running)
+docker start fintech-db
+
+# Start backend (new window)
+cd C:\Users\RAJAT\Desktop\assignmentsss\backend
+node server.js
+
+# Start frontend (new window)
+cd C:\Users\RAJAT\Desktop\assignmentsss\frontend
+npm start
 ```
 
 ## Sample CSV Format
